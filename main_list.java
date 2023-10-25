@@ -8,8 +8,12 @@ public class main_list {
              d1.addLast(i);
 
         }
+        System.out.print("List asli : ");
         System.out.println(d1.toString());
-        d1.NewList(3, 4);
+        d1.NewList(1,8 );
+        System.out.print("List d1 : ");
+        System.out.print(d1.toString());
+
         
 
     }

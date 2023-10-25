@@ -1,23 +1,127 @@
 import java.util.Scanner;
 
 public class DoublyLinkedList<E> {
-    
+   
     public void NewList( E start,E end ){
+
+       DoublyLinkedList<Integer> d2=new DoublyLinkedList<Integer>(); 
+
+      Boolean hast_start=false;
+
+      Boolean hast_end=false;
+
+       Node y=header.getNext();
+
         for(int i=0;i<size;i++){
-            Node x=header.getNext();
-            x=x.getNext();
-            if(x==start){
-                System.out.println(x.getElement());
+          if(y.getElement()==start){
+                hast_start=true;
                 break;
-                
             }
+            y=y.getNext();
+        }
+         Node z=header.getNext();
+      for(int i=0;i<size;i++){
+            
+            if(z.getElement()==end){
+                hast_end=true;
+                break;
+            }
+          
+         z=z.getNext();
+        }
+        try {
+          if(hast_start==true & hast_end==true){
+          Node x=header.getNext();
+
+        for(int i=0;i<size;i++){
+            if(x.getElement()==start){
+                break;
+            }
+             x=x.getNext();
+        }
+         Node Start_D2=x;
+      
+         Node prev_start=null;
+
+       if(start!=header.getNext().getElement() && end!=trailer.getPrev().getElement()){
+         prev_start=x.getPrev();
+        }
+        else if(start==header.getNext().getElement() && end!=trailer.getPrev().getElement()){
+             prev_start=header;
         }
         
-    
-        DoublyLinkedList<Integer> d2=new DoublyLinkedList<Integer>();
+        else if(start!=header.getNext().getElement() && end==trailer.getPrev().getElement()){
+             prev_start=x.getPrev();
+        }
+
+        else if(start==header.getNext().getElement() && end==trailer.getPrev().getElement()){
+             prev_start=header;
+        }
+       
+  
+       for(int i=0;i<size;i++){
+            if(x.getElement()==end){
+                break;
+            }
+            x=x.getNext();
+        }
+        Node End_D2=x;
+
+        Node next_end=null;
+
+         if(start!=header.getNext().getElement() && end!=trailer.getPrev().getElement()){
+           next_end=x.getNext();
+        }
         
+        else if(start==header.getNext().getElement() && end!=trailer.getPrev().getElement()){
+          next_end=x.getNext();
+        }
+        
+        else if(start!=header.getNext().getElement() && end==trailer.getPrev().getElement()){
+            next_end=trailer;
+        }
+
+        else if(start==header.getNext().getElement() && end==trailer.getPrev().getElement()){
+           next_end=trailer;
+        }
         
 
+        prev_start.setNext(next_end);
+
+        next_end.setPrev(prev_start);
+
+        Start_D2.setPrev(d2.header);
+
+        d2.header.setNext(Start_D2);
+
+        End_D2.setNext(d2.trailer);
+
+        d2.trailer.setPrev(End_D2);
+
+        System.out.print("List d2 : ");
+        System.out.println(d2.toString());
+        
+
+        }
+         else if (hast_start!=true){
+          System.out.println("start is not in the list");
+        }
+
+        else if (hast_end!=true){
+          System.out.println("end is not in the list");
+        }
+
+        else if (hast_start!=true & hast_end!=true){
+          System.out.println("star and end are not in the list");
+        }
+        }
+        catch(Exception e) {
+          System.out.println("end<start");
+        }
+        
+       
+         
+      
     }
   private static class Node<E> {
     private E element;              
